@@ -456,6 +456,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ for smart kitchens everywhere**
-
 *Transform your cooking experience with AI-powered recipe generation and beautiful food photography.*
