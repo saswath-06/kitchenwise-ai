@@ -1,0 +1,369 @@
+﻿<Window x:Class="KitchenWise.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="KitchenWise - Kitchen Organization App"
+        Height="700"
+        Width="1100"
+        MinHeight="600"
+        MinWidth="900"
+        WindowStartupLocation="CenterScreen">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<!-- Header -->
+		<Border Grid.Row="0" Background="#2E7D32" Padding="20,15">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<StackPanel Orientation="Horizontal" Grid.Column="0">
+					<TextBlock Text="🍽️" FontSize="24" Margin="0,0,10,0"/>
+					<TextBlock Text="KitchenWise"
+                              FontSize="20"
+                              FontWeight="Bold"
+                              Foreground="White"
+                              VerticalAlignment="Center"/>
+					<TextBlock Text=" - Smart Pantry Management"
+                              FontSize="14"
+                              Foreground="#E8F5E8"
+                              VerticalAlignment="Center"
+                              Margin="10,0,0,0"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal" Grid.Column="1">
+					<Button Name="BtnShowWelcome"
+                            Content="Welcome"
+                            Padding="15,8"
+                            Margin="5"
+                            Background="#4CAF50"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="BtnShowWelcome_Click"/>
+					<Button Name="BtnShowPantry"
+                            Content="My Pantry"
+                            Padding="15,8"
+                            Margin="5"
+                            Background="#FF9800"
+                            Foreground="White"
+                            BorderThickness="0"
+                            Click="BtnShowPantry_Click"/>
+					
+					<!-- Authentication Status and Logout -->
+					<TextBlock Name="TxtUserStatus"
+                              Text="Not logged in"
+                              Foreground="White"
+                              VerticalAlignment="Center"
+                              Margin="15,0,10,0"
+                              FontSize="12"/>
+					
+					<Button Name="BtnHeaderLogout"
+                            Content="🚪 Sign Out"
+                            Padding="12,6"
+                            Margin="5"
+                            Background="#F44336"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="12"
+                            Visibility="Collapsed"
+                            Click="BtnHeaderLogout_Click"/>
+				</StackPanel>
+			</Grid>
+		</Border>
+
+		<!-- Main Content Area -->
+		<Border Grid.Row="1" Background="#F5F5F5" Padding="20">
+			<Grid>
+				<!-- Welcome View -->
+				<StackPanel x:Name="WelcomeView"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Visibility="Visible">
+					<TextBlock Text="Welcome to KitchenWise!"
+                              FontSize="28"
+                              FontWeight="Bold"
+                              Foreground="#2E7D32"
+                              HorizontalAlignment="Center"
+                              Margin="0,0,0,20"/>
+
+					<TextBlock Text="Your smart kitchen organization companion"
+                              FontSize="16"
+                              Foreground="#666"
+                              HorizontalAlignment="Center"
+                              Margin="0,0,0,30"/>
+
+					<!-- Quick Action Buttons -->
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+						<Button Name="BtnLogin"
+                                Content="Sign In"
+                                Padding="20,10"
+                                Margin="10"
+                                Background="#4CAF50"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="BtnLogin_Click"/>
+
+						<Button Name="BtnLogout"
+                                Content="Sign Out"
+                                Padding="20,10"
+                                Margin="10"
+                                Background="#F44336"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Visibility="Collapsed"
+                                Click="BtnLogout_Click"/>
+
+						<Button Name="BtnGetStarted"
+                                Content="Get Started"
+                                Padding="20,10"
+                                Margin="10"
+                                Background="#FF9800"
+                                Foreground="White"
+                                FontSize="14"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="BtnGetStarted_Click"/>
+					</StackPanel>
+				</StackPanel>
+
+				<!-- Pantry Management View -->
+				<Grid x:Name="PantryView" Visibility="Collapsed">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="2*"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="1*"/>
+					</Grid.ColumnDefinitions>
+
+					<!-- Left Panel - Item List -->
+					<Border Grid.Column="0" Background="White" CornerRadius="8" Padding="15" Margin="0,0,10,0">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<!-- Pantry Header -->
+							<TextBlock Grid.Row="0" Text="My Pantry" FontSize="20" FontWeight="Bold" Margin="0,0,0,15"/>
+
+							<!-- Search and Filter -->
+							<Grid Grid.Row="1" Margin="0,0,0,15">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="120"/>
+								</Grid.ColumnDefinitions>
+
+								<TextBox Grid.Column="0"
+                                       x:Name="SearchBox"
+                                       Text=""
+                                       Padding="8"
+                                       Margin="0,0,10,0"
+                                       TextChanged="SearchBox_TextChanged"/>
+
+								<Button Grid.Column="1"
+                                      Content="Clear"
+                                      Padding="8"
+                                      Margin="0,0,10,0"
+                                      Click="BtnClearSearch_Click"/>
+
+								<ComboBox Grid.Column="2"
+                                        x:Name="CategoryFilter"
+                                        SelectedIndex="0"
+                                        SelectionChanged="CategoryFilter_SelectionChanged">
+									<ComboBoxItem Content="All"/>
+									<ComboBoxItem Content="Vegetables"/>
+									<ComboBoxItem Content="Fruits"/>
+									<ComboBoxItem Content="Meat"/>
+									<ComboBoxItem Content="Dairy"/>
+									<ComboBoxItem Content="Grains"/>
+									<ComboBoxItem Content="Spices"/>
+									<ComboBoxItem Content="Other"/>
+								</ComboBox>
+							</Grid>
+
+							<!-- Items List -->
+							<ListBox Grid.Row="2"
+                                   x:Name="PantryItemsList"
+                                   SelectionChanged="PantryItemsList_SelectionChanged"
+                                   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<Border Background="#F8F8F8"
+                                              CornerRadius="5"
+                                              Padding="10"
+                                              Margin="0,0,0,5">
+											<Grid>
+												<Grid.ColumnDefinitions>
+													<ColumnDefinition Width="*"/>
+													<ColumnDefinition Width="Auto"/>
+												</Grid.ColumnDefinitions>
+
+												<StackPanel Grid.Column="0">
+													<TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+													<TextBlock Text="{Binding DisplayQuantity}" FontSize="12" Foreground="#666"/>
+													<TextBlock Text="{Binding Category}" FontSize="10" Foreground="#999"/>
+												</StackPanel>
+
+												<StackPanel Grid.Column="1" HorizontalAlignment="Right">
+													<TextBlock Text="{Binding ExpiryStatus}"
+                                                             FontSize="10"
+                                                             FontWeight="Bold"
+                                                             HorizontalAlignment="Right"/>
+													<TextBlock Text="{Binding DisplayAddedDate}"
+                                                             FontSize="10"
+                                                             Foreground="#666"
+                                                             HorizontalAlignment="Right"/>
+												</StackPanel>
+											</Grid>
+										</Border>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+
+							<!-- Stats -->
+							<Border Grid.Row="3" Background="#E8F5E8" CornerRadius="5" Padding="10" Margin="0,15,0,0">
+								<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+									<TextBlock x:Name="StatsText" Text="Loading..." FontSize="12" Foreground="#2E7D32"/>
+								</StackPanel>
+							</Border>
+						</Grid>
+					</Border>
+
+					<!-- Splitter -->
+					<GridSplitter Grid.Column="1" Width="5" Background="#E0E0E0" VerticalAlignment="Stretch"/>
+
+					<!-- Right Panel - Add/Edit Item -->
+					<Border Grid.Column="2" Background="White" CornerRadius="8" Padding="15" Margin="10,0,0,0">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<!-- Add Item Header -->
+							<TextBlock Grid.Row="0" Text="Add New Item" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+							<!-- Add Item Form -->
+							<StackPanel Grid.Row="1">
+								<TextBlock Text="Item Name:" Margin="0,0,0,5"/>
+								<TextBox x:Name="NewItemName" Padding="8" Margin="0,0,0,15"/>
+
+								<TextBlock Text="Quantity:" Margin="0,0,0,5"/>
+								<TextBox x:Name="NewItemQuantity" Text="1" Padding="8" Margin="0,0,0,15"/>
+
+								<TextBlock Text="Unit:" Margin="0,0,0,5"/>
+								<ComboBox x:Name="NewItemUnit" SelectedIndex="0" Margin="0,0,0,15">
+									<ComboBoxItem Content="piece"/>
+									<ComboBoxItem Content="cup"/>
+									<ComboBoxItem Content="lb"/>
+									<ComboBoxItem Content="kg"/>
+									<ComboBoxItem Content="L"/>
+									<ComboBoxItem Content="ml"/>
+									<ComboBoxItem Content="tbsp"/>
+									<ComboBoxItem Content="tsp"/>
+								</ComboBox>
+
+								<TextBlock Text="Category:" Margin="0,0,0,5"/>
+								<ComboBox x:Name="NewItemCategory" SelectedIndex="6" Margin="0,0,0,20">
+									<ComboBoxItem Content="Vegetables"/>
+									<ComboBoxItem Content="Fruits"/>
+									<ComboBoxItem Content="Meat"/>
+									<ComboBoxItem Content="Dairy"/>
+									<ComboBoxItem Content="Grains"/>
+									<ComboBoxItem Content="Spices"/>
+									<ComboBoxItem Content="Other"/>
+								</ComboBox>
+							</StackPanel>
+
+							<!-- Action Buttons -->
+							<StackPanel Grid.Row="2">
+								<Button Content="Add to Pantry"
+                                      Padding="10"
+                                      Background="#4CAF50"
+                                      Foreground="White"
+                                      BorderThickness="0"
+                                      FontWeight="Bold"
+                                      Margin="0,0,0,10"
+                                      Click="BtnAddItem_Click"/>
+
+								<Button Content="Remove Selected"
+                                      x:Name="BtnRemoveItem"
+                                      Padding="10"
+                                      Background="#F44336"
+                                      Foreground="White"
+                                      BorderThickness="0"
+                                      IsEnabled="False"
+                                      Margin="0,0,0,10"
+                                      Click="BtnRemoveItem_Click"/>
+
+								<Button Content="Consume Item"
+                                      x:Name="BtnConsumeItem"
+                                      Padding="10"
+                                      Background="#FF9800"
+                                      Foreground="White"
+                                      BorderThickness="0"
+                                      IsEnabled="False"
+                                      Margin="0,0,0,10"
+                                      Click="BtnConsumeItem_Click"/>
+
+								<Button Content="🍳 Generate Recipes"
+                                      x:Name="BtnGenerateRecipes"
+                                      Padding="10"
+                                      Background="#9C27B0"
+                                      Foreground="White"
+                                      BorderThickness="0"
+                                      FontWeight="Bold"
+                                      Margin="0,0,0,10"
+                                      Click="BtnGenerateRecipes_Click"/>
+
+								<Button Content="🍽️ Open Recipe Center"
+                                      x:Name="BtnShowRecipeDetails"
+                                      Padding="10"
+                                      Background="#2196F3"
+                                      Foreground="White"
+                                      BorderThickness="0"
+                                      IsEnabled="False"
+                                      Margin="0,0,0,10"
+                                      Click="BtnShowRecipeDetails_Click"/>
+							</StackPanel>
+						</Grid>
+					</Border>
+				</Grid>
+			</Grid>
+		</Border>
+
+		<!-- Footer -->
+		<Border Grid.Row="2" Background="#E8E8E8" Padding="15,10">
+			<Grid>
+				<TextBlock Text="Version 1.0.0"
+                          FontSize="12"
+                          Foreground="#666"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"/>
+
+				<TextBlock x:Name="StatusText"
+                          Text="Ready"
+                          FontSize="12"
+                          Foreground="#666"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Center"/>
+			</Grid>
+		</Border>
+	</Grid>
+</Window>
