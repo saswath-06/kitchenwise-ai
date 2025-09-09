@@ -119,8 +119,8 @@ dotnet run
 
 4. **Access the application**
 - **Desktop App**: Launches automatically
-- **API Documentation**: http://localhost:5000/swagger
-- **Health Check**: http://localhost:5000/health
+- **API Documentation**: http://localhost:PORT/swagger
+- **Health Check**: http://localhost:PORT/health
 
 ## 🔧 Configuration
 
