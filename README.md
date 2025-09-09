@@ -416,10 +416,7 @@ Contributions are welcome! Here's how to get started:
 - Run migrations: `dotnet ef database update`
 
 ### Getting Help
-- 📧 **Email**: [your-email@domain.com]
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/KitchenWise/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/KitchenWise/discussions)
-- 📖 **Documentation**: Check the `/docs` folder for detailed guides
+- 📧 **Email**: [s2yeshwa@uwaterloo.ca]
 
 ## 🙏 Acknowledgments
 
