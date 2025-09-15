@@ -1,7 +1,7 @@
 # KitchenWise 🍳
 Transform your kitchen into a smart, AI-powered cooking experience. Generate personalized recipes from your pantry ingredients and visualize them with stunning AI-generated images.
 
-**Live Demo**: [Deploy your own instance using our Railway deployment guide](#-deployment)
+[Deploy your own instance using our Railway deployment guide](#-deployment)
 
 ![KitchenWise Demo](https://via.placeholder.com/800x400/2E7D32/FFFFFF?text=KitchenWise+Smart+Kitchen+Management)
 
